@@ -11,69 +11,86 @@ import {CurrencyExchangePanel} from '../components/CurrencyExchangePanel';
 import {exchangeToValue, exchangeFromValue} from '../selectors/rates';
 import {CURRENCY_SYMBOLS} from '../constants';
 
-const ExchangePage = ({pockets, rates, exchangeCurrency}) => {
+export const ExchangePage = ({pockets, rates, exchangeCurrency}) => {
   const pocketCurrencies = Object.keys(pockets);
-  const [fromCurrency, setFromCurrency] = useState(pocketCurrencies[0]);
-  const [fromValue, setFromValue] = useState('');
-  const [toCurrency, setToCurrency] = useState(pocketCurrencies[1]);
-  const [toValue, setToValue] = useState('');
-  const [isDisabled, setIsDisabled] = useState(true);
+  const [state, setState] = useState({
+    fromCurrency: pocketCurrencies[0],
+    toCurrency: pocketCurrencies[1],
+    toValue: '',
+    fromValue: '',
+    isDisabled: true
+  });
 
   const onFromCurrencyChange = (value) => {
-    if(toCurrency === value) {
-      setToCurrency(fromCurrency)
-    }
-    setFromCurrency(value);
-    if(fromValue) {
-      setToValue(exchangeToValue(rates, fromCurrency, toCurrency, fromValue));
-    } else {
-      setToValue('')
-    }
+    setState((prevState) => ({
+      ...prevState,
+      toCurrency: prevState.toCurrency === value? 
+                      prevState.fromCurrency: prevState.toCurrency,
+      fromCurrency: value
+    }));
+
+    onFromValueChange(state.fromValue);
   }
 
   const onToCurrencyChange = (value) => {
-    if(fromCurrency === value) {
-      setFromCurrency(toCurrency);
-    }
-    setToCurrency(value);
-    if(toValue) {
-      setFromValue(exchangeFromValue(rates,fromCurrency,toCurrency,toValue));
-    } else {
-      setToValue('');
-    }
+    setState((prevState) => ({
+      ...prevState,
+      fromCurrency: prevState.fromCurrency === value? 
+                      prevState.toCurrency: prevState.fromCurrency,
+      toCurrency: value
+    }));
+    
+    onToValueChange(state.toValue);
   }
 
   const onFromValueChange = (value) => {
-    setFromValue(value);
-    if(value) {
-      setToValue(exchangeToValue(rates, fromCurrency, toCurrency, value));
-    } else {
-      setToValue('');
-    }
-    
-    if(parseFloat(value) > 0 && parseFloat(value) <= pockets[fromCurrency]) {
-      setIsDisabled(false);
-    } else {
-      setIsDisabled(true);
-    }
+    setState((prevState) => {
+      const newToValue = value? 
+      exchangeToValue(rates, prevState.fromCurrency, prevState.toCurrency, value): '';
+      return {
+        ...prevState,
+        fromValue: value,
+        toValue: newToValue
+      }
+    });
+
+    isButtonDisabled();
   }
 
   const onToValueChange = (value) => {
-    setToValue(value);
-    if(value) {
-      setFromValue(exchangeFromValue(rates,fromCurrency,toCurrency,value));
-    } else {
-      setFromValue('');
-    }
+    setState((prevState) => {
+      const newFromValue = value? 
+      exchangeFromValue(rates, prevState.fromCurrency, prevState.toCurrency, value): '';
+      return ({
+        ...prevState,
+        toValue: value,
+        fromValue: newFromValue
+    })});
+
+    isButtonDisabled();
   }
 
   const switchCurrencies = () => {
-    const auxFromValue = fromValue;
-    const auxFromCurrency = fromCurrency;
-    setFromCurrency(toCurrency);
-    setFromValue(toValue);
-    setToCurrency(auxFromCurrency);
-    setToValue(auxFromValue);
+    setState((prevState) => ({
+      ...prevState,
+      toCurrency: prevState.fromCurrency,
+      fromCurrency: prevState.toCurrency,
+      toValue: prevState.fromValue,
+      fromValue: prevState.toValue
+    }));
+
+    isButtonDisabled();
+  }
+
+  const isButtonDisabled = () => {
+    setState((prevState) => {
+      const isDisabled = !parseFloat(prevState.fromValue) || 
+                          parseFloat(prevState.fromValue) > pockets[prevState.fromCurrency];
+      return {
+        ...prevState,
+        isDisabled
+      }
+    });
   }
 
   const onExchangeClick = () => {
@@ -87,14 +104,14 @@ const ExchangePage = ({pockets, rates, exchangeCurrency}) => {
       <div className="exchange-page__from-select">
         <CurrencySelect currencies={pockets}
                         onChange={onFromCurrencyChange}
-                        value={fromCurrency}/>
+                        value={state.fromCurrency}/>
       </div>
       <div className="exchange-page__from-input">
-        <CurrencyInput value={fromValue} 
+        <CurrencyInput value={state.fromValue} 
                        placeholder="0"
                        label="Amount to Exchange"
                        required
-                       symbol={CURRENCY_SYMBOLS[fromCurrency]}
+                       symbol={CURRENCY_SYMBOLS[state.fromCurrency]}
                        onChange={onFromValueChange} />
       </div>
     </div>
@@ -107,25 +124,25 @@ const ExchangePage = ({pockets, rates, exchangeCurrency}) => {
       <div className="exchange-page__currency-info">
         <Icon>show_chart</Icon>
         <CurrencyExchangePanel rates={rates}
-                               fromCurrency={fromCurrency}
-                               toCurrency={toCurrency} />
+                               fromCurrency={state.fromCurrency}
+                               toCurrency={state.toCurrency} />
       </div>
     </div>
     <div className="exchange-page__to-row">
       <div className="exchange-page__to-select">
         <CurrencySelect currencies={pockets}
                         onChange={onToCurrencyChange}
-                        value={toCurrency}/>
+                        value={state.toCurrency}/>
       </div>
       <div className="exchange-page__to-input">
-        <CurrencyInput value={toValue} 
+        <CurrencyInput value={state.toValue} 
                        placeholder="0"
                        label="Exchanged Amount"
-                       symbol={CURRENCY_SYMBOLS[toCurrency]}
+                       symbol={CURRENCY_SYMBOLS[state.toCurrency]}
                        onChange={onToValueChange}/>
       </div>
     </div>
-    <Button fullWidth disabled={isDisabled} variant="contained" color="primary"
+    <Button fullWidth disabled={state.isDisabled} variant="contained" color="primary"
             onClick={onExchangeClick}>Exchange</Button>
   </div>
 )}
