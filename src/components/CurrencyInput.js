@@ -15,6 +15,8 @@ export const CurrencyInput = ({
 }) => {
 
   const formatNumber = (number) => {
+    number = number.toString();
+    
     if(number && parseFloat(number) < Number.MAX_SAFE_INTEGER) {
       // Format integer part
       number = number.replace(/\d+/, (integerPart) => {
