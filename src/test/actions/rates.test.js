@@ -37,7 +37,7 @@ describe('rates actions - ', () => {
       promise.then(() => {
         expect(actions[1]).toEqual({
           type: 'SET_RATES',
-          rates: ratesResponse.rates
+          rates: {...ratesResponse.rates, USD: 1}
         });
       })
     });
