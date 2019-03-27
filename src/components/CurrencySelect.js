@@ -6,7 +6,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 
-export const CurrencySelect = ({
+const CurrencySelect = ({
   currencies,
   onChange,
   value,
@@ -39,8 +39,9 @@ Balance:
 };
 
 CurrencySelect.propTypes = {
-  currencies: propTypes.object,
-  onChange: propTypes.func,
-  value: propTypes.string,
+  currencies: propTypes.objectOf(propTypes.number).isRequired,
+  onChange: propTypes.func.isRequired,
+  value: propTypes.string.isRequired,
 };
 
+export default CurrencySelect;

@@ -3,7 +3,7 @@ import {shallow} from 'enzyme';
 
 import currencies from '../fixtures/pockets';
 import Select from '@material-ui/core/Select';
-import {CurrencySelect} from '../../components/CurrencySelect';
+import CurrencySelect from '../../components/CurrencySelect';
 
 describe('CurrencySelect -', () => {
   let wrapper, onChange, defaultProps;

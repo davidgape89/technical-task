@@ -21,6 +21,7 @@ module.exports = {
     ],
     "rules": {
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "no-underscore-dangle": [2, { "allow": ['__REDUX_DEVTOOLS_EXTENSION_COMPOSE__'] }],
         "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
     },
 };

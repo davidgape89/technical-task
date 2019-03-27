@@ -1,9 +1,9 @@
 import React from 'react';
+import propTypes from 'prop-types';
 import { CURRENCY_SYMBOLS } from '../constants';
 import { exchangeToValue } from '../selectors/rates';
-import propTypes from 'prop-types';
 
-export const CurrencyExchangePanel = ({
+const CurrencyExchangePanel = ({
   rates,
   fromCurrency,
   toCurrency,
@@ -12,7 +12,7 @@ export const CurrencyExchangePanel = ({
   return (
     <span>
       {CURRENCY_SYMBOLS[fromCurrency]}
-1&nbsp;=&nbsp;
+      1&nbsp;=&nbsp;
       {CURRENCY_SYMBOLS[toCurrency]}
       {Math.round(result * 10000) / 10000}
     </span>
@@ -20,7 +20,9 @@ export const CurrencyExchangePanel = ({
 };
 
 CurrencyExchangePanel.propTypes = {
-  rates: propTypes.object,
-  fromCurrency: propTypes.string,
-  toCurrency: propTypes.string
-}
+  rates: propTypes.objectOf(propTypes.number).isRequired,
+  fromCurrency: propTypes.string.isRequired,
+  toCurrency: propTypes.string.isRequired,
+};
+
+export default CurrencyExchangePanel;

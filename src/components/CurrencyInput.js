@@ -7,34 +7,34 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 
 const CURRENCY_REGEX = /^([0-9]{1,3},([0-9]{3},)*[0-9]{3}|[0-9]+).?([0-9]{0,2})$/;
 
-export const CurrencyInput = ({
-  label = 'Amount',
+const CurrencyInput = ({
+  label,
   value,
   placeholder,
   symbol,
   onChange,
 }) => {
   const formatNumber = (number) => {
-    number = number.toString();
-
-    if (number && parseFloat(number) < Number.MAX_SAFE_INTEGER) {
+    let formattedNumber = number;
+    if (formattedNumber && parseFloat(formattedNumber) < Number.MAX_SAFE_INTEGER) {
       // Format integer part
-      number = number.replace(/\d+/, integerPart => parseFloat(integerPart).toLocaleString('en-US'));
+      formattedNumber = formattedNumber.replace(/\d+/, integerPart => parseFloat(integerPart).toLocaleString('en-US'));
       // Take only two decimals
-      return number.match(/[\d\,]*\.?\d{0,2}/)[0];
+      return formattedNumber.match(/[\d,]*\.?\d{0,2}/)[0];
     }
 
     return '';
   };
 
-  const onAmountChange = ({ target: { value } }) => {
-    if (value.match(CURRENCY_REGEX)) {
-      value = value.match(CURRENCY_REGEX)[0];
-      value = value.replace(/\,/g, '');
-      if (parseFloat(value) < Number.MAX_SAFE_INTEGER) {
-        onChange(value);
+  const onAmountChange = ({ target }) => {
+    let formattedValue = target.value;
+    if (formattedValue.match(CURRENCY_REGEX)) {
+      [formattedValue] = formattedValue.match(CURRENCY_REGEX);
+      formattedValue = formattedValue.replace(/,/g, '');
+      if (parseFloat(formattedValue) < Number.MAX_SAFE_INTEGER) {
+        onChange(formattedValue);
       }
-    } else if (value === '') {
+    } else if (formattedValue === '') {
       onChange('');
     }
   };
@@ -56,9 +56,15 @@ export const CurrencyInput = ({
 
 CurrencyInput.propTypes = {
   label: propTypes.string,
-  value: propTypes.string,
+  value: propTypes.string.isRequired,
   placeholder: propTypes.string,
-  symbol: propTypes.string,
-  onChange: propTypes.func,
+  symbol: propTypes.string.isRequired,
+  onChange: propTypes.func.isRequired,
 };
 
+CurrencyInput.defaultProps = {
+  label: 'Amount',
+  placeholder: '',
+};
+
+export default CurrencyInput;

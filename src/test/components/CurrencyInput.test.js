@@ -2,7 +2,7 @@ import React from 'react';
 import {shallow} from 'enzyme';
 
 import Input from '@material-ui/core/Input';
-import {CurrencyInput} from '../../components/CurrencyInput';
+import CurrencyInput from '../../components/CurrencyInput';
 
 describe('CurrencyInput -', () => {
   let wrapper, onChange, defaultProps;

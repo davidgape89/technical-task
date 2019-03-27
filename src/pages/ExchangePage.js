@@ -5,10 +5,10 @@ import Button from '@material-ui/core/Button';
 import Fab from '@material-ui/core/Fab';
 import Icon from '@material-ui/core/Icon';
 
-import exchangeCurrency from '../actions/pockets';
-import { CurrencySelect } from '../components/CurrencySelect';
-import { CurrencyInput } from '../components/CurrencyInput';
-import { CurrencyExchangePanel } from '../components/CurrencyExchangePanel';
+import exchangeCurrencyFunc from '../actions/pockets';
+import CurrencySelect from '../components/CurrencySelect';
+import CurrencyInput from '../components/CurrencyInput';
+import CurrencyExchangePanel from '../components/CurrencyExchangePanel';
 import { exchangeToValue, exchangeFromValue } from '../selectors/rates';
 import { CURRENCY_SYMBOLS } from '../constants';
 
@@ -21,6 +21,42 @@ export const ExchangePage = ({ pockets, rates, exchangeCurrency }) => {
     fromValue: '',
     isDisabled: true,
   });
+
+  const onFromValueChange = (value) => {
+    setState((prevState) => {
+      const newToValue = value
+        ? exchangeToValue(
+          rates,
+          prevState.fromCurrency,
+          prevState.toCurrency,
+          parseFloat(value),
+        ).toString()
+        : '';
+      return {
+        ...prevState,
+        fromValue: value,
+        toValue: newToValue,
+      };
+    });
+  };
+
+  const onToValueChange = (value) => {
+    setState((prevState) => {
+      const newFromValue = value
+        ? exchangeFromValue(
+          rates,
+          prevState.fromCurrency,
+          prevState.toCurrency,
+          parseFloat(value),
+        ).toString()
+        : '';
+      return ({
+        ...prevState,
+        toValue: value,
+        fromValue: newFromValue,
+      });
+    });
+  };
 
   const onFromCurrencyChange = (value) => {
     setState(prevState => ({
@@ -42,32 +78,6 @@ export const ExchangePage = ({ pockets, rates, exchangeCurrency }) => {
     }));
 
     onToValueChange(state.toValue);
-  };
-
-  const onFromValueChange = (value) => {
-    setState((prevState) => {
-      const newToValue = value
-        ? exchangeToValue(rates, prevState.fromCurrency, prevState.toCurrency, parseFloat(value)).toString()
-        : '';
-      return {
-        ...prevState,
-        fromValue: value,
-        toValue: newToValue,
-      };
-    });
-  };
-
-  const onToValueChange = (value) => {
-    setState((prevState) => {
-      const newFromValue = value
-        ? exchangeFromValue(rates, prevState.fromCurrency, prevState.toCurrency, parseFloat(value)).toString()
-        : '';
-      return ({
-        ...prevState,
-        toValue: value,
-        fromValue: newFromValue,
-      });
-    });
   };
 
   const switchCurrencies = () => {
@@ -168,10 +178,10 @@ export const ExchangePage = ({ pockets, rates, exchangeCurrency }) => {
   );
 };
 
-CurrencySelect.propTypes = {
-  pockets: propTypes.object,
-  rates: propTypes.object,
-  exchangeCurrency: propTypes.func
+ExchangePage.propTypes = {
+  pockets: propTypes.objectOf(propTypes.number).isRequired,
+  rates: propTypes.objectOf(propTypes.number).isRequired,
+  exchangeCurrency: propTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -180,7 +190,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  exchangeCurrency,
+  exchangeCurrency: exchangeCurrencyFunc,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExchangePage);

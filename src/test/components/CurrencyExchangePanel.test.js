@@ -1,7 +1,7 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 import rates from '../fixtures/rates';
-import {CurrencyExchangePanel} from '../../components/CurrencyExchangePanel';
+import CurrencyExchangePanel from '../../components/CurrencyExchangePanel';
 
 describe('CurrencyExchangePanel - ', () => {
   let wrapper;
