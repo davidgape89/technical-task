@@ -11,7 +11,7 @@ describe('ratesReducer -', () => {
   });
 
   it('sets the base correctly', () => {
-    const newBase = 'USD';
+    const newBase = 'GBP';
     const state = ratesReducer(defaultState, {
       type: 'SET_BASE',
       base: newBase
