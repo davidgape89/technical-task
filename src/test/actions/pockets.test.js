@@ -1,4 +1,4 @@
-import {exchangeCurrency} from '../../actions/pockets';
+import exchangeCurrency from '../../actions/pockets';
 
 describe('pocket actions - ', () => {
   describe('exchange currency -', () => {

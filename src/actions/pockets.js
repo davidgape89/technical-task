@@ -1,7 +1,9 @@
-export const exchangeCurrency = (fromCurrency, fromAmount, toCurrency, toAmount) => ({
+const exchangeCurrency = (fromCurrency, fromAmount, toCurrency, toAmount) => ({
   type: 'EXCHANGE_CURRENCY',
   fromCurrency,
   fromAmount,
   toCurrency,
-  toAmount
+  toAmount,
 });
+
+export default exchangeCurrency;

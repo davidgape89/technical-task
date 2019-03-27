@@ -6,28 +6,33 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 
 export const CurrencySelect = ({
-  currencies, 
+  currencies,
   onChange,
-  value
+  value,
 }) => {
   const balance = Math.round(currencies[value] * 100) / 100;
   return (
     <FormControl fullWidth>
       <Select
         value={value}
-        onChange={(event) => onChange(event.target.value)}
+        onChange={event => onChange(event.target.value)}
         input={
-          <OutlinedInput labelWidth={0}/>
+          <OutlinedInput labelWidth={0} />
         }
       >
         {Object.keys(currencies).map(currency => (
-          <MenuItem  key={currency}
-                    value={currency}>
+          <MenuItem
+            key={currency}
+            value={currency}
+          >
             {currency}
           </MenuItem>
         ))}
       </Select>
-      <FormHelperText>Balance: {balance}</FormHelperText>
+      <FormHelperText>
+Balance:
+        {balance}
+      </FormHelperText>
     </FormControl>
-  )
+  );
 };

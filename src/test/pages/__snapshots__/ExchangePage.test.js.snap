@@ -1,0 +1,145 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CurrencyExchangePanel -  renders correctly 1`] = `
+<div
+  className="exchange-page"
+>
+  <h1>
+    Currency Exchange
+  </h1>
+  <div
+    className="exchange-page__from-row"
+  >
+    <div
+      className="exchange-page__from-select"
+    >
+      <CurrencySelect
+        currencies={
+          Object {
+            "EUR": 20,
+            "GBP": 40,
+            "USD": 30,
+          }
+        }
+        onChange={[Function]}
+        value="EUR"
+      />
+    </div>
+    <div
+      className="exchange-page__from-input"
+    >
+      <CurrencyInput
+        label="Amount to Exchange"
+        onChange={[Function]}
+        placeholder="0"
+        required={true}
+        symbol="€"
+        value=""
+      />
+    </div>
+  </div>
+  <div
+    className="exchange-page__utils"
+  >
+    <div
+      className="exchange-page__switcher"
+    >
+      <WithStyles(Fab)
+        color="primary"
+        onClick={[Function]}
+      >
+        <WithStyles(Icon)>
+          cached
+        </WithStyles(Icon)>
+      </WithStyles(Fab)>
+    </div>
+    <div
+      className="exchange-page__currency-info"
+    >
+      <WithStyles(Icon)>
+        show_chart
+      </WithStyles(Icon)>
+      <CurrencyExchangePanel
+        fromCurrency="EUR"
+        rates={
+          Object {
+            "AUD": 1.5999,
+            "BGN": 1.9558,
+            "BRL": 4.3012,
+            "CAD": 1.5125,
+            "CHF": 1.1338,
+            "CNY": 7.6014,
+            "CZK": 25.646,
+            "DKK": 7.4624,
+            "EUR": 1,
+            "GBP": 0.8628,
+            "HKD": 8.9128,
+            "HRK": 7.4178,
+            "HUF": 313.29,
+            "IDR": 16082.94,
+            "ILS": 4.0974,
+            "INR": 78.136,
+            "ISK": 132.9,
+            "JPY": 126.63,
+            "KRW": 1281.96,
+            "MXN": 21.5168,
+            "MYR": 4.6109,
+            "NOK": 9.6915,
+            "NZD": 1.6567,
+            "PHP": 60.042,
+            "PLN": 4.2834,
+            "RON": 4.7615,
+            "RUB": 73.004,
+            "SEK": 10.431,
+            "SGD": 1.5335,
+            "THB": 36.032,
+            "TRY": 6.2152,
+            "USD": 1.1354,
+            "ZAR": 16.3783,
+          }
+        }
+        toCurrency="USD"
+      />
+    </div>
+  </div>
+  <div
+    className="exchange-page__to-row"
+  >
+    <div
+      className="exchange-page__to-select"
+    >
+      <CurrencySelect
+        currencies={
+          Object {
+            "EUR": 20,
+            "GBP": 40,
+            "USD": 30,
+          }
+        }
+        onChange={[Function]}
+        value="USD"
+      />
+    </div>
+    <div
+      className="exchange-page__to-input"
+    >
+      <CurrencyInput
+        label="Exchanged Amount"
+        onChange={[Function]}
+        placeholder="0"
+        symbol="$"
+        value=""
+      />
+    </div>
+  </div>
+  <WithStyles(Button)
+    color="primary"
+    disabled={true}
+    fullWidth={true}
+    onClick={[Function]}
+    variant="contained"
+  >
+    Exchange
+  </WithStyles(Button)>
+</div>
+`;

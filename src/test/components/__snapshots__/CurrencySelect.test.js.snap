@@ -33,7 +33,7 @@ exports[`CurrencySelect - renders correctly 1`] = `
     </WithStyles(MenuItem)>
   </WithStyles(WithFormControlContext(Select))>
   <WithStyles(WithFormControlContext(FormHelperText))>
-    Balance: 
+    Balance:
     20
   </WithStyles(WithFormControlContext(FormHelperText))>
 </WithStyles(FormControl)>
