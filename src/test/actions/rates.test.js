@@ -2,29 +2,55 @@ import axios from 'axios';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
-import {currencies} from '../../mocks/currencyMock';
-import {rates} from '../../mocks/ratesMock';
-import {setBaseCurrency, requestRates} from '../../actions/rates';
+import ratesResponse from '../fixtures/rates';
+import {requestRates, setBaseCurrency} from '../../actions/rates';
 
 const createMockStore = configureMockStore([thunk]);
 jest.mock('axios');
 
 describe('rates actions - ', () => {
-  // describe('setBaseCurrency - ', () => {
+  let store, response, actions;
 
-  // });
+  beforeEach(() => {
+    store = createMockStore({rates: {base: 'EUR'}});
+    response = {data: {rates: ratesResponse.rates}};
+    axios.get.mockResolvedValue(response);
+  });
+
+  describe('setBaseCurrency - ', () => {
+    let promise;
+    beforeEach(() => {
+      promise = store.dispatch(setBaseCurrency('USD'));
+      actions = store.getActions();
+    });
+
+    it('dispatches the base action', () => {
+      promise.then(() => {
+        expect(actions[0]).toEqual({
+          type: 'SET_BASE',
+          base: 'USD'
+        });
+      });
+    });
+
+    it('dispatches the request rates action', () => {
+      promise.then(() => {
+        expect(actions[1]).toEqual({
+          type: 'SET_RATES',
+          rates: ratesResponse.rates
+        });
+      })
+    });
+  });
 
   describe('requestRates - ', () => {
     it('makes the correct call', (done) => {
-      const store = createMockStore({rates: {base: 'EUR'}});
-      const response = {data: {rates}};
-      axios.get.mockResolvedValue(response);
       
       store.dispatch(requestRates()).then(() => {
         const actions = store.getActions();
         expect(actions[0]).toEqual({
           type: 'SET_RATES',
-          rates
+          rates: ratesResponse.rates
         });
         expect(axios.get)
           .toHaveBeenCalledWith(
