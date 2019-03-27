@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CurrencySelect - renders correctly 1`] = `
+<WithStyles(FormControl)
+  fullWidth={true}
+>
+  <WithStyles(WithFormControlContext(Select))
+    input={
+      <WithStyles(OutlinedInput)
+        labelWidth={0}
+      />
+    }
+    onChange={[Function]}
+    value="EUR"
+  >
+    <WithStyles(MenuItem)
+      key="EUR"
+      value="EUR"
+    >
+      EUR
+    </WithStyles(MenuItem)>
+    <WithStyles(MenuItem)
+      key="USD"
+      value="USD"
+    >
+      USD
+    </WithStyles(MenuItem)>
+    <WithStyles(MenuItem)
+      key="GBP"
+      value="GBP"
+    >
+      GBP
+    </WithStyles(MenuItem)>
+  </WithStyles(WithFormControlContext(Select))>
+  <WithStyles(WithFormControlContext(FormHelperText))>
+    Balance: 
+    20
+  </WithStyles(WithFormControlContext(FormHelperText))>
+</WithStyles(FormControl)>
+`;
