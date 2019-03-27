@@ -1,4 +1,5 @@
 import React from 'react';
+import propTypes from 'prop-types';
 import Select from '@material-ui/core/Select';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -36,3 +37,10 @@ Balance:
     </FormControl>
   );
 };
+
+CurrencySelect.propTypes = {
+  currencies: propTypes.object,
+  onChange: propTypes.func,
+  value: propTypes.string,
+};
+

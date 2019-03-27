@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import Fab from '@material-ui/core/Fab';
@@ -54,8 +55,6 @@ export const ExchangePage = ({ pockets, rates, exchangeCurrency }) => {
         toValue: newToValue,
       };
     });
-
-    isButtonDisabled();
   };
 
   const onToValueChange = (value) => {
@@ -69,8 +68,6 @@ export const ExchangePage = ({ pockets, rates, exchangeCurrency }) => {
         fromValue: newFromValue,
       });
     });
-
-    isButtonDisabled();
   };
 
   const switchCurrencies = () => {
@@ -81,30 +78,26 @@ export const ExchangePage = ({ pockets, rates, exchangeCurrency }) => {
       toValue: prevState.fromValue,
       fromValue: prevState.toValue,
     }));
-
-    isButtonDisabled();
   };
 
   const isButtonDisabled = () => {
-    setState((prevState) => {
-      const isDisabled = !parseFloat(prevState.fromValue)
-                          || parseFloat(prevState.fromValue) > pockets[prevState.fromCurrency];
-      return {
-        ...prevState,
-        isDisabled,
-      };
-    });
+    const floatValue = parseFloat(state.fromValue);
+    const isDisabled = !floatValue || floatValue > pockets[state.fromCurrency];
+    return isDisabled;
   };
 
   const onExchangeClick = () => {
     const toValue = parseFloat(state.toValue);
     const fromValue = parseFloat(state.fromValue);
+
     exchangeCurrency(
       state.fromCurrency,
       fromValue,
       state.toCurrency,
       toValue,
     );
+
+    isButtonDisabled();
   };
 
   return (
@@ -164,15 +157,21 @@ export const ExchangePage = ({ pockets, rates, exchangeCurrency }) => {
       </div>
       <Button
         fullWidth
-        disabled={state.isDisabled}
+        disabled={isButtonDisabled()}
         variant="contained"
         color="primary"
         onClick={onExchangeClick}
       >
-Exchange
+        Exchange
       </Button>
     </div>
   );
+};
+
+CurrencySelect.propTypes = {
+  pockets: propTypes.object,
+  rates: propTypes.object,
+  exchangeCurrency: propTypes.func
 };
 
 const mapStateToProps = state => ({

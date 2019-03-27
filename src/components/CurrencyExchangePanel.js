@@ -1,6 +1,7 @@
 import React from 'react';
 import { CURRENCY_SYMBOLS } from '../constants';
 import { exchangeToValue } from '../selectors/rates';
+import propTypes from 'prop-types';
 
 export const CurrencyExchangePanel = ({
   rates,
@@ -17,3 +18,9 @@ export const CurrencyExchangePanel = ({
     </span>
   );
 };
+
+CurrencyExchangePanel.propTypes = {
+  rates: propTypes.object,
+  fromCurrency: propTypes.string,
+  toCurrency: propTypes.string
+}

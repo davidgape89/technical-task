@@ -1,4 +1,5 @@
 import React from 'react';
+import propTypes from 'prop-types';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Input from '@material-ui/core/Input';
@@ -52,3 +53,12 @@ export const CurrencyInput = ({
     </FormControl>
   );
 };
+
+CurrencyInput.propTypes = {
+  label: propTypes.string,
+  value: propTypes.string,
+  placeholder: propTypes.string,
+  symbol: propTypes.string,
+  onChange: propTypes.func,
+};
+
