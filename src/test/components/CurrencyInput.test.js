@@ -8,6 +8,7 @@ describe('CurrencyInput -', () => {
   let wrapper, onChange, defaultProps;
 
   beforeEach(() => {
+    onChange = jest.fn();
     defaultProps = {
       label: 'Amount',
       value: '34',
@@ -15,7 +16,6 @@ describe('CurrencyInput -', () => {
       symbol: '$',
       onChange: onChange
     };
-    onChange = jest.fn();
     wrapper = shallow(
       <CurrencyInput {...defaultProps} />
     );

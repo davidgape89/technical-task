@@ -21,6 +21,7 @@ exports[`CurrencyExchangePanel -  renders correctly 1`] = `
             "USD": 30,
           }
         }
+        isBalanceRed={false}
         onChange={[Function]}
         value="EUR"
       />
@@ -116,6 +117,7 @@ exports[`CurrencyExchangePanel -  renders correctly 1`] = `
             "USD": 30,
           }
         }
+        isBalanceRed={false}
         onChange={[Function]}
         value="USD"
       />

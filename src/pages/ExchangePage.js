@@ -93,8 +93,13 @@ export const ExchangePage = ({ pockets, rates, exchangeCurrency }) => {
   const isButtonDisabled = () => {
     const floatValue = parseFloat(state.fromValue);
     const isDisabled = !floatValue || floatValue > pockets[state.fromCurrency];
+
     return isDisabled;
   };
+
+  const isFromBalanceRed = () => {
+    return state.fromValue > pockets[state.fromCurrency];
+  }
 
   const onExchangeClick = () => {
     const toValue = parseFloat(state.toValue);
@@ -106,8 +111,6 @@ export const ExchangePage = ({ pockets, rates, exchangeCurrency }) => {
       state.toCurrency,
       toValue,
     );
-
-    isButtonDisabled();
   };
 
   return (
@@ -116,6 +119,7 @@ export const ExchangePage = ({ pockets, rates, exchangeCurrency }) => {
       <div className="exchange-page__from-row">
         <div className="exchange-page__from-select">
           <CurrencySelect
+            isBalanceRed={isFromBalanceRed()}
             currencies={pockets}
             onChange={onFromCurrencyChange}
             value={state.fromCurrency}
