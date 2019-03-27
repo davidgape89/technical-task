@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CurrencyInput - renders correctly 1`] = `
+<WithStyles(FormControl)
+  fullWidth={true}
+>
+  <WithStyles(WithFormControlContext(InputLabel))
+    htmlFor="currency-input"
+  >
+    Amount
+  </WithStyles(WithFormControlContext(InputLabel))>
+  <WithStyles(Input)
+    id="currency-input"
+    onChange={[Function]}
+    placeholder="0"
+    startAdornment={
+      <WithStyles(WithFormControlContext(InputAdornment))
+        position="start"
+      >
+        $
+      </WithStyles(WithFormControlContext(InputAdornment))>
+    }
+    value="34"
+    variant="outlined"
+  />
+</WithStyles(FormControl)>
+`;
