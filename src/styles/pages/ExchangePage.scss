@@ -1,0 +1,37 @@
+.exchange-page {
+  > * {
+    margin-bottom: 20px;
+  }
+}
+
+.exchange-page__from-row,
+.exchange-page__to-row {
+  display: flex;
+}
+
+.exchange-page__from-select,
+.exchange-page__to-select,
+.exchange-page__switcher {
+  flex: 1;
+  margin-right: 30px;
+}
+
+.exchange-page__from-input,
+.exchange-page__to-input,
+.exchange-page__currency-info {
+  flex: 2;
+}
+
+.exchange-page__utils {
+  display: flex;
+  align-items: center;
+}
+
+.exchange-page__switcher,
+.exchange-page__currency-info {
+  display: flex;
+  justify-content: center;
+}
+
+
+
