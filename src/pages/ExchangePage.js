@@ -97,9 +97,7 @@ export const ExchangePage = ({ pockets, rates, exchangeCurrency }) => {
     return isDisabled;
   };
 
-  const isFromBalanceRed = () => {
-    return state.fromValue > pockets[state.fromCurrency];
-  }
+  const isFromBalanceRed = () => state.fromValue > pockets[state.fromCurrency];
 
   const onExchangeClick = () => {
     const toValue = parseFloat(state.toValue);

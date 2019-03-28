@@ -32,7 +32,7 @@ const CurrencySelect = ({
         ))}
       </Select>
       <FormHelperText>
-        <span style={{color: isBalanceRed? 'red': 'black'}}>
+        <span style={{ color: isBalanceRed ? 'red' : 'black' }}>
           Balance:&nbsp;
           {balance}
         </span>
@@ -42,8 +42,8 @@ const CurrencySelect = ({
 };
 
 CurrencySelect.defaultProps = {
-  isBalanceRed: false
-}
+  isBalanceRed: false,
+};
 
 CurrencySelect.propTypes = {
   isBalanceRed: propTypes.bool,

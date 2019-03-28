@@ -5,7 +5,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Input from '@material-ui/core/Input';
 import InputAdornment from '@material-ui/core/InputAdornment';
 
-const CURRENCY_REGEX = /^([0-9]{1,3},([0-9]{3},)*[0-9]{3}|[0-9]+).?([0-9]{0,2})$/;
+const CURRENCY_REGEX = /^[0-9,]+.?([0-9]{0,2}$)/;
 
 const CurrencyInput = ({
   label,
