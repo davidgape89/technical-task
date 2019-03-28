@@ -2,6 +2,7 @@
 
 h1 {
   color: $blue-600;
+  padding-bottom: 16px;
 }
 
 .exchange-page {
@@ -37,6 +38,14 @@ h1 {
 .exchange-page__currency-info {
   display: flex;
   justify-content: center;
+}
+
+.exchange-page__currency-info {
+  line-height: 25px;
+
+  .material-icons {
+    margin-right: 8px;
+  }
 }
 
 
