@@ -1,14 +1,16 @@
 @import '../variables';
 
 h1 {
-  color: $blue-600;
-  padding-bottom: 16px;
+  color: $blue-500;
+  margin-bottom: 32px;
 }
 
 .exchange-page {
-  > * {
-    margin-bottom: 20px;
-  }
+  padding: 20px;
+}
+
+.exchange-page > div {
+  margin-bottom: 20px;
 }
 
 .exchange-page__from-row,
@@ -47,6 +49,8 @@ h1 {
     margin-right: 8px;
   }
 }
+
+
 
 
 
